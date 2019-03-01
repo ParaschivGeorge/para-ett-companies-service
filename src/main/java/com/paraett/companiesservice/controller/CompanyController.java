@@ -6,13 +6,11 @@ import com.paraett.companiesservice.proxy.UsersServiceProxy;
 import com.paraett.companiesservice.service.CompanyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/companies")
@@ -24,6 +22,28 @@ public class CompanyController {
     public CompanyController(CompanyService companyService, UsersServiceProxy usersServiceProxy) {
         this.companyService = companyService;
         this.usersServiceProxy = usersServiceProxy;
+    }
+
+    @GetMapping("")
+    public ResponseEntity<Object> getAllCompanies() {
+        List<Company> companies = this.companyService.getAllCompanies();
+
+        return ResponseEntity.ok(companies);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getCompany(@PathVariable Long id) {
+        Company company = this.companyService.getCompany(id);
+
+        return ResponseEntity.ok(company);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteCompany(@PathVariable Long id) {
+        this.companyService.deleteCompany(id);
+        // Update the other services
+
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("")
@@ -40,5 +60,12 @@ public class CompanyController {
         }
 
         return ResponseEntity.created(location).body(company);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateCompany(@PathVariable Long id, @RequestBody Company company) {
+        Company updatedCompany = this.companyService.updateCompany(id, company);
+
+        return ResponseEntity.ok(updatedCompany);
     }
 }
