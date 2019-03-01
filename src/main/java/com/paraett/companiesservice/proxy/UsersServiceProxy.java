@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name="zuul-api-gateway-server")
 @RibbonClient(name="users-service")
 public interface UsersServiceProxy {
-    @PostMapping("/users/registerOwner")
-    public ResponseEntity<Object> registerOwner(@RequestBody OwnerRegisterUserDto ownerRegisterUserDto, @RequestParam(name="companyId") Integer companyId);
+    @PostMapping("/users-service/users/registerOwner")
+    public ResponseEntity<Object> registerOwner(@RequestBody OwnerRegisterUserDto ownerRegisterUserDto, @RequestParam(name="companyId") Long companyId);
 }

@@ -32,7 +32,7 @@ public class CompanyController {
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(company.getId())
                 .toUri();
 
-        ResponseEntity<Object> response = usersServiceProxy.registerOwner(companyRegisterDto.getOwnerRegisterUserDto(), Math.toIntExact(company.getId()));
+        ResponseEntity<Object> response = usersServiceProxy.registerOwner(companyRegisterDto.getOwnerRegisterUserDto(), company.getId());
 
         if (response.getStatusCode() != HttpStatus.CREATED) {
             this.companyService.deleteCompany(company.getId());
