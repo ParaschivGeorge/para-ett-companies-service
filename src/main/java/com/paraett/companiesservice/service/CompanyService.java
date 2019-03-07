@@ -28,20 +28,20 @@ public class CompanyService {
         Optional<Company> optCompany = this.companyRepository.findById(id);
 
         if (optCompany.isPresent()) {
-            companyRepository.deleteById(id);
+            this.companyRepository.deleteById(id);
             return;
         }
-        throw new CompanyNotFoundException("id-" + id);
+        throw new CompanyNotFoundException("id: " + id);
     }
 
     public Company updateCompany(Long id, Company company) {
         Optional<Company> optCompany = this.companyRepository.findById(id);
 
         if (optCompany.isPresent()) {
-            company.setId(optCompany.get().getId());
-            return companyRepository.save(company);
+            company.setId(id);
+            return this.companyRepository.save(company);
         }
-        throw new CompanyNotFoundException("id-" + id);
+        throw new CompanyNotFoundException("id: " + id);
     }
 
     public Company getCompany(Long id) {
@@ -49,7 +49,7 @@ public class CompanyService {
         if (optCompany.isPresent()) {
             return optCompany.get();
         }
-        throw new CompanyNotFoundException("id-" + id);
+        throw new CompanyNotFoundException("id: " + id);
     }
 
     public List<Company> getAllCompanies() {

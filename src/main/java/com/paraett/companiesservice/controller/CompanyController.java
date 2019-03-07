@@ -25,14 +25,14 @@ public class CompanyController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Object> getAllCompanies() {
+    public ResponseEntity<List<Company>> getAllCompanies() {
         List<Company> companies = this.companyService.getAllCompanies();
 
         return ResponseEntity.ok(companies);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getCompany(@PathVariable Long id) {
+    public ResponseEntity<Company> getCompany(@PathVariable Long id) {
         Company company = this.companyService.getCompany(id);
 
         return ResponseEntity.ok(company);
@@ -41,7 +41,8 @@ public class CompanyController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteCompany(@PathVariable Long id) {
         this.companyService.deleteCompany(id);
-        // Update the other services
+        // TODO: Update the other services
+        this.usersServiceProxy.deleteUsers(id);
 
         return ResponseEntity.noContent().build();
     }
@@ -63,9 +64,9 @@ public class CompanyController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateCompany(@PathVariable Long id, @RequestBody Company company) {
+    public ResponseEntity<Company> updateCompany(@PathVariable Long id, @RequestBody Company company) {
         Company updatedCompany = this.companyService.updateCompany(id, company);
 
-        return ResponseEntity.ok(updatedCompany);
+        return ResponseEntity.accepted().body(updatedCompany);
     }
 }
