@@ -43,6 +43,7 @@ public class CompanyController {
         this.companyService.deleteCompany(id);
         // TODO: Update the other services
         this.usersServiceProxy.deleteUsers(id);
+        this.usersServiceProxy.deleteProjects(id);
 
         return ResponseEntity.noContent().build();
     }

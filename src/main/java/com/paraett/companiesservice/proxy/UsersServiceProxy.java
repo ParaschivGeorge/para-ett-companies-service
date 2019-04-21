@@ -17,4 +17,7 @@ public interface UsersServiceProxy {
 
     @DeleteMapping("/users-service/users")
     ResponseEntity<Object> deleteUsers(@RequestParam(name="companyId") Long companyId);
+
+    @DeleteMapping("/users-service/projects")
+    ResponseEntity<Object> deleteProjects(@RequestParam(name="companyId") Long companyId);
 }
