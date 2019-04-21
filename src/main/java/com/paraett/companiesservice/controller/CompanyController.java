@@ -2,6 +2,8 @@ package com.paraett.companiesservice.controller;
 
 import com.paraett.companiesservice.model.dtos.CompanyRegisterDto;
 import com.paraett.companiesservice.model.entities.Company;
+import com.paraett.companiesservice.proxy.FreeDaysServiceProxy;
+import com.paraett.companiesservice.proxy.RequestsServiceProxy;
 import com.paraett.companiesservice.proxy.UsersServiceProxy;
 import com.paraett.companiesservice.service.CompanyService;
 import org.springframework.http.HttpStatus;
@@ -18,10 +20,14 @@ public class CompanyController {
 
     private CompanyService companyService;
     private UsersServiceProxy usersServiceProxy;
+    private RequestsServiceProxy requestsServiceProxy;
+    private FreeDaysServiceProxy freeDaysServiceProxy;
 
-    public CompanyController(CompanyService companyService, UsersServiceProxy usersServiceProxy) {
+    public CompanyController(CompanyService companyService, UsersServiceProxy usersServiceProxy, RequestsServiceProxy requestsServiceProxy, FreeDaysServiceProxy freeDaysServiceProxy) {
         this.companyService = companyService;
         this.usersServiceProxy = usersServiceProxy;
+        this.requestsServiceProxy = requestsServiceProxy;
+        this.freeDaysServiceProxy = freeDaysServiceProxy;
     }
 
     @GetMapping("")
@@ -44,6 +50,8 @@ public class CompanyController {
         // TODO: Update the other services
         this.usersServiceProxy.deleteUsers(id);
         this.usersServiceProxy.deleteProjects(id);
+        this.requestsServiceProxy.deleteRequests(id);
+        this.freeDaysServiceProxy.deleteFreeDays(id);
 
         return ResponseEntity.noContent().build();
     }
