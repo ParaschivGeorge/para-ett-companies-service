@@ -4,6 +4,7 @@ import com.paraett.companiesservice.model.dtos.CompanyRegisterDto;
 import com.paraett.companiesservice.model.entities.Company;
 import com.paraett.companiesservice.proxy.FreeDaysServiceProxy;
 import com.paraett.companiesservice.proxy.RequestsServiceProxy;
+import com.paraett.companiesservice.proxy.TimesheetRecordsServiceProxy;
 import com.paraett.companiesservice.proxy.UsersServiceProxy;
 import com.paraett.companiesservice.service.CompanyService;
 import org.springframework.http.HttpStatus;
@@ -22,12 +23,14 @@ public class CompanyController {
     private UsersServiceProxy usersServiceProxy;
     private RequestsServiceProxy requestsServiceProxy;
     private FreeDaysServiceProxy freeDaysServiceProxy;
+    private TimesheetRecordsServiceProxy timesheetRecordsServiceProxy;
 
-    public CompanyController(CompanyService companyService, UsersServiceProxy usersServiceProxy, RequestsServiceProxy requestsServiceProxy, FreeDaysServiceProxy freeDaysServiceProxy) {
+    public CompanyController(CompanyService companyService, UsersServiceProxy usersServiceProxy, RequestsServiceProxy requestsServiceProxy, FreeDaysServiceProxy freeDaysServiceProxy, TimesheetRecordsServiceProxy timesheetRecordsServiceProxy) {
         this.companyService = companyService;
         this.usersServiceProxy = usersServiceProxy;
         this.requestsServiceProxy = requestsServiceProxy;
         this.freeDaysServiceProxy = freeDaysServiceProxy;
+        this.timesheetRecordsServiceProxy = timesheetRecordsServiceProxy;
     }
 
     @GetMapping("")
@@ -47,11 +50,11 @@ public class CompanyController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteCompany(@PathVariable Long id) {
         this.companyService.deleteCompany(id);
-        // TODO: Update the other services
         this.usersServiceProxy.deleteUsers(id);
         this.usersServiceProxy.deleteProjects(id);
         this.requestsServiceProxy.deleteRequests(id);
         this.freeDaysServiceProxy.deleteFreeDays(id);
+        this.timesheetRecordsServiceProxy.deleteTimesheetRecords(id);
 
         return ResponseEntity.noContent().build();
     }
