@@ -1,6 +1,7 @@
 package com.paraett.companiesservice.model.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 
 @Entity
 @Table(name = "company_tbl")
@@ -10,9 +11,11 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Max(50)
     @Column(unique = true, nullable = false, length = 50)
     private String name;
 
+    @Max(255)
     @Column
     private String description;
 
