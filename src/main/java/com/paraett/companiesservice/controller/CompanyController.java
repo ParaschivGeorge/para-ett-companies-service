@@ -21,16 +21,22 @@ public class CompanyController {
 
     private CompanyService companyService;
     private UsersServiceProxy usersServiceProxy;
-    private RequestsServiceProxy requestsServiceProxy;
-    private FreeDaysServiceProxy freeDaysServiceProxy;
-    private TimesheetRecordsServiceProxy timesheetRecordsServiceProxy;
+//    private RequestsServiceProxy requestsServiceProxy;
+//    private FreeDaysServiceProxy freeDaysServiceProxy;
+//    private TimesheetRecordsServiceProxy timesheetRecordsServiceProxy;
 
-    public CompanyController(CompanyService companyService, UsersServiceProxy usersServiceProxy, RequestsServiceProxy requestsServiceProxy, FreeDaysServiceProxy freeDaysServiceProxy, TimesheetRecordsServiceProxy timesheetRecordsServiceProxy) {
+//    public CompanyController(CompanyService companyService, UsersServiceProxy usersServiceProxy, RequestsServiceProxy requestsServiceProxy, FreeDaysServiceProxy freeDaysServiceProxy, TimesheetRecordsServiceProxy timesheetRecordsServiceProxy) {
+//        this.companyService = companyService;
+//        this.usersServiceProxy = usersServiceProxy;
+//        this.requestsServiceProxy = requestsServiceProxy;
+//        this.freeDaysServiceProxy = freeDaysServiceProxy;
+//        this.timesheetRecordsServiceProxy = timesheetRecordsServiceProxy;
+//    }
+
+
+    public CompanyController(CompanyService companyService, UsersServiceProxy usersServiceProxy) {
         this.companyService = companyService;
         this.usersServiceProxy = usersServiceProxy;
-        this.requestsServiceProxy = requestsServiceProxy;
-        this.freeDaysServiceProxy = freeDaysServiceProxy;
-        this.timesheetRecordsServiceProxy = timesheetRecordsServiceProxy;
     }
 
     @GetMapping("")
@@ -50,11 +56,12 @@ public class CompanyController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteCompany(@PathVariable Long id) {
         this.companyService.deleteCompany(id);
-        this.usersServiceProxy.deleteUsers(id);
-        this.usersServiceProxy.deleteProjects(id);
-        this.requestsServiceProxy.deleteRequests(id);
-        this.freeDaysServiceProxy.deleteFreeDays(id);
-        this.timesheetRecordsServiceProxy.deleteTimesheetRecords(id);
+
+//        this.usersServiceProxy.deleteUsers(id);
+//        this.usersServiceProxy.deleteProjects(id);
+//        this.requestsServiceProxy.deleteRequests(id);
+//        this.freeDaysServiceProxy.deleteFreeDays(id);
+//        this.timesheetRecordsServiceProxy.deleteTimesheetRecords(id);
 
         return ResponseEntity.noContent().build();
     }

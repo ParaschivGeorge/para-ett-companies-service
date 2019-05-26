@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name="zuul-api-gateway-server")
+//@FeignClient(name="zuul-api-gateway-server")
 @RibbonClient(name="timesheet-records-service")
 public interface TimesheetRecordsServiceProxy {
     @DeleteMapping("/timesheet-records-service/timesheet-records")

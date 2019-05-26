@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name="zuul-api-gateway-server")
+//@FeignClient(name="zuul-api-gateway-server")
 @RibbonClient(name="free-days-service")
 public interface FreeDaysServiceProxy {
     @DeleteMapping("/free-days-service/free-days")

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-@FeignClient(name="zuul-api-gateway-server")
+//@FeignClient(name="zuul-api-gateway-server")
 @RibbonClient(name="requests-service")
 public interface RequestsServiceProxy {
     @DeleteMapping("/requests-service/requests")
