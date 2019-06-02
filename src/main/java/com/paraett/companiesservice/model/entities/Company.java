@@ -1,5 +1,7 @@
 package com.paraett.companiesservice.model.entities;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 
@@ -11,11 +13,11 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Max(50)
-    @Column(unique = true, nullable = false, length = 50)
+    @Length(max=50)
+    @Column(nullable = false, length = 50)
     private String name;
 
-    @Max(255)
+    @Length(max=50)
     @Column
     private String description;
 

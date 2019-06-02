@@ -72,14 +72,14 @@ public class CompanyController {
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(company.getId())
                 .toUri();
 
-        ResponseEntity<Object> response = usersServiceProxy.registerOwner(companyRegisterDto.getOwnerRegisterUserDto(), company.getId());
-
-        if (response.getStatusCode() != HttpStatus.CREATED) {
+        try {
+            usersServiceProxy.registerOwner(companyRegisterDto.getOwnerRegisterUserDto(), company.getId());
+            return ResponseEntity.created(location).body(company);
+        } catch(Exception e) {
             this.companyService.deleteCompany(company.getId());
-            return response;
+            throw e;
         }
 
-        return ResponseEntity.created(location).body(company);
     }
 
     @PutMapping("/{id}")
