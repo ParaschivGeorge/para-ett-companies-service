@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name="zuul-api-gateway-server")
+@FeignClient(name="zuul-api-gateway-server", url="https://zuul-api-gateway-server")
 @RibbonClient(name="users-service")
 public interface UsersServiceProxy {
     @PostMapping("/users-service/users/registerOwner")

@@ -72,13 +72,15 @@ public class CompanyController {
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(company.getId())
                 .toUri();
 
-        try {
-            usersServiceProxy.registerOwner(companyRegisterDto.getOwnerRegisterUserDto(), company.getId());
-            return ResponseEntity.created(location).body(company);
-        } catch(Exception e) {
-            this.companyService.deleteCompany(company.getId());
-            throw e;
-        }
+//        try {
+//            usersServiceProxy.registerOwner(companyRegisterDto.getOwnerRegisterUserDto(), company.getId());
+//            return ResponseEntity.created(location).body(company);
+//        } catch(Exception e) {
+//            this.companyService.deleteCompany(company.getId());
+//            throw e;
+//        }
+
+        return ResponseEntity.created(location).body(company);
 
     }
 
